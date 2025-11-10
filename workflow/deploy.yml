@@ -1,0 +1,19 @@
+name: Deploy index.html to EC2
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: Amazon Linux
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Copy index.html to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2.KEY }}
+          source: "index.html"
+          target: "/usr/share/nginx/html"
