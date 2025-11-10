@@ -16,7 +16,7 @@ jobs:
           echo ${{ vars.EC2_USER }}
       - name: scp
         run: |
-          echo  ${{ vars.EC2_KEY }} > key.pem
+          echo  "${{ vars.EC2_KEY }}" > key.pem
           ls
           scp -i key.pem ./index.html ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }}:~/
           ssh -i key.pem ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }} "ls ~/"
