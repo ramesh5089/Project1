@@ -17,7 +17,7 @@ jobs:
       - name: scp
         run: |
           echo  "${{ vars.EC2_KEY }}" > key.pem
-          chmod 0644 key.pem
+          chmod 600 key.pem
           ls
           scp -i key.pem -o StrictHostKeyChecking=no ./index.html ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }}:~/
           ssh -i key.pem -o StrictHostKeyChecking=no ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }} "ls ~/"
