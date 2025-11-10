@@ -14,6 +14,11 @@ jobs:
         run: |
           echo ${{ vars.EC2_HOST }}
           echo ${{ vars.EC2_USER }}
+      - name: update index
+        run: |
+          PIPELINE_ID="${{ github.run_id }}"
+          echo $PIPELINE_ID
+          sed -i "s/pipelinenumber/${PIPELINE_ID}/g" path/to/yourfile.txt
       - name: scp
         run: |
           echo  "${{ vars.EC2_KEY }}" > key.pem
@@ -21,7 +26,7 @@ jobs:
           ls
           scp -i key.pem -o StrictHostKeyChecking=no ./index.html ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }}:~/
           ssh -i key.pem -o StrictHostKeyChecking=no ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }} "ls ~/"
-          ssh -i key.pem -o StrictHostKeyChecking=no ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }} "sudo mv ~/index.html /usr/share/nginx/html/"
+          ssh -i key.pem -o StrictHostKeyChecking=no ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }} "sudo mv ~/index.html /usr/share/nginx/html/; sudo systemctl restart nginx"
 
       # - name: Copy index.html to EC2
       #   uses: appleboy/scp-action@v0.1.7
