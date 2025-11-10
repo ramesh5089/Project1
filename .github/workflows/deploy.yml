@@ -18,9 +18,9 @@ jobs:
         run: |
           echo  "${{ vars.EC2_KEY }}" > key.pem
           ls
-          scp -i key.pem ./index.html ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }}:~/
-          ssh -i key.pem ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }} "ls ~/"
-          ssh -i key.pem ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }} "sudo mv ~/index.html /usr/share/nginx/html/"
+          scp -i key.pem -o StrictHostKeyChecking=no ./index.html ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }}:~/
+          ssh -i key.pem -o StrictHostKeyChecking=no ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }} "ls ~/"
+          ssh -i key.pem -o StrictHostKeyChecking=no ${{ vars.EC2_USER }}@${{ vars.EC2_HOST }} "sudo mv ~/index.html /usr/share/nginx/html/"
 
       # - name: Copy index.html to EC2
       #   uses: appleboy/scp-action@v0.1.7
