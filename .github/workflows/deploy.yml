@@ -9,6 +9,11 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
+      - nane: test
+        run: |
+          echo ${{ vars.EC2_HOST }}
+          echo ${{ vars.EC2_USER }}
+          echo ${{ vars.EC2_KEY }}
       - name: Copy index.html to EC2
         uses: appleboy/scp-action@v0.1.7
         with:
