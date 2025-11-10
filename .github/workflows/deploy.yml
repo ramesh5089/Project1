@@ -18,7 +18,7 @@ jobs:
         run: |
           PIPELINE_ID="${{ github.run_id }}"
           echo $PIPELINE_ID
-          sed -i "s/pipelinenumber/${PIPELINE_ID}/g" path/to/yourfile.txt
+          sed -i "s/pipelinenumber/${PIPELINE_ID}/g" index.html
       - name: scp
         run: |
           echo  "${{ vars.EC2_KEY }}" > key.pem
