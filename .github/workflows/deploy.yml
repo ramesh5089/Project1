@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
-      - nane: test
+      - name: test
         run: |
           echo ${{ vars.EC2_HOST }}
           echo ${{ vars.EC2_USER }}
